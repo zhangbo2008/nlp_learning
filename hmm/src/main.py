@@ -1,6 +1,6 @@
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+##
 from dataset import load_data
 from hmm import *
 
