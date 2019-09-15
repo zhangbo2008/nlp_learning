@@ -4,7 +4,7 @@ import numpy as np
 import jieba
 
 class Sim(object):
-    def __init__(self, kernel='tfidf'):
+    def __init__(self, kernel=None):
         self.word2idx = {}
         self.kernel = kernel
 

@@ -9,7 +9,7 @@ class LSA(object):
         self.kernel = kernel
         self.docs = []
         self.vocabs = set()
-        self.build_vocab(docs)
+        self.build_vocab(docs)#初始化写这里面
 
     def tokenizer(self, sent):
         return jieba.lcut(sent)
@@ -20,16 +20,16 @@ class LSA(object):
             # 为了简单仅仅保留词的长度大于1的
             words = list(filter(lambda x: len(x) > 1, self.tokenizer(doc))) 
             self.docs.append(words)
-            self.vocabs.update(words)
+            self.vocabs.update(words)  #词组字典vocabs
 
         self.vocabs = list(self.vocabs)
-        self.word2idx = dict(zip(self.vocabs, range(len(self.vocabs))))
+        self.word2idx = dict(zip(self.vocabs, range(len(self.vocabs))))#编码
 
     def build_bow_matrix(self):
         matrix = np.zeros([len(self.vocabs), len(self.docs)])
         for docidx, words in enumerate(self.docs):
             for word in words:
-                matrix[self.word2idx[word], docidx] += 1
+                matrix[self.word2idx[word], docidx] += 1 #单词和文章对应矩阵.
         return matrix
 
     def build_tfidf_matrix(self):
@@ -49,9 +49,9 @@ class LSA(object):
         if self.kernel == 'tfidf':
             matrix = self.build_tfidf_matrix()
         else:
-            matrix = self.build_bow_matrix()
+            matrix = self.build_bow_matrix()#用bow_matrix来进行分析
 
-        U, S, Vt = np.linalg.svd(matrix)
+        U, S, Vt = np.linalg.svd(matrix)  #奇异值分解
 
         sort_idx = np.argsort(-U)
         # 一般不取第一列，第一列的词往往是本身
@@ -74,7 +74,7 @@ class LSA(object):
 
         sort_idx = np.argsort(-Vt, axis=1)
         # 一般不取第一行，第一行是自己本身
-        topk = sort_idx[1:k+1, :]
+        topk = sort_idx[1:k+1, :] #找相关的文章.
         print(topk)
 
 if __name__ == '__main__':
