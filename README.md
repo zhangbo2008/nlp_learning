@@ -1,3 +1,19 @@
+
+学习NLP
+感觉非常核心,做完ocr,补补基础!!!
+
+语言是ai的核心.
+
+
+
+
+
+
+
+
+
+
+
 <p align="center"> / NLP Learning / </p>
 
 <p align="center">结合python学习自然语言处理</p>
